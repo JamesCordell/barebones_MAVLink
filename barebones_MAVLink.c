@@ -27,7 +27,7 @@
  
 */
 
-#include "./mavlink_c_v2/common/mavlink.h"
+#include "../mavlink/c_library_v2/common/mavlink.h"
 #include "math.h"
 
 mavlink_message_t mvl_tx_message; //A special MAVLink message data structure. 
@@ -146,11 +146,10 @@ void MVL_Handle_Mission_Request_List(mavlink_message_t* mvl_msg_ptr)
 
 void setup() 
 {
-  Serial.begin(115200); //start the serial port for the MAVLink packets.
+//  Serial.begin(115200); //start the serial port for the MAVLink packets.
 }
 
-void loop() 
-{
+while (1) {
   /* ======================== Serial MAVLink Message Reception ====================
    * If bytes come in on the serial port, we feed them to mavlink_parse_char().
    * This helper function keeps track of incoming bytes and alerts us when it's 
@@ -158,7 +157,7 @@ void loop()
    * See https://github.com/mavlink/c_library_v2/blob/master/mavlink_helpers.h#L966
    *==============================================================================*/
    
-  while (Serial.available())
+  //while (Serial.available())
   {
     uint8_t rxbyte = Serial.read();
     mvl_packet_recieved = mavlink_parse_char(mvl_chan,rxbyte, 
